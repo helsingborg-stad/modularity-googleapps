@@ -1,4 +1,4 @@
-var ModularityGoogleApps = ModularityGoogleApps || {};
+ModularityGoogleApps = ModularityGoogleApps || {};
 ModularityGoogleApps.Module = ModularityGoogleApps.Module || {};
 
 ModularityGoogleApps.Module.Calendar = (function ($) {
@@ -15,18 +15,20 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
      * Should be named as the class itself
      */
     function Calendar() {
-        this.handleEvents();
     }
 
-    Calendar.prototype.handleEvents = function() {
-        $(document).on('click', '.modularity-mod-g-calendar', function (e) {
-            e.preventDefault();
-            this.auth();
-        }.bind(this));
-    };
-
     Calendar.prototype.init = function() {
-        this.checkAuth();
+        ModularityGoogleApps.Auth.checkAuth(function (authResult) {
+            // Access granted
+            if (authResult && !authResult.error) {
+                console.log("Access granted");
+                return true;
+            }
+
+            // Access denied
+            ModularityGoogleApps.Module.Calendar.showAuthButtons();
+            return false;
+        });
     };
 
     /**

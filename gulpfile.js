@@ -33,12 +33,13 @@ gulp.task('sass-dev', function() {
 // Concatenate & Minify JS
 gulp.task('scripts-dist', function() {
     gulp.src([
+            'source/js/modularity-google-apps.js',
             'source/js/**/*.js',
             '!source/js/Module/*.js'
         ])
-        .pipe(concat('modularity-dictionary.dev.js'))
+        .pipe(concat('modularity-google-apps.dev.js'))
         .pipe(gulp.dest('dist/js'))
-        .pipe(rename('modularity-dictionary.min.js'))
+        .pipe(rename('modularity-google-apps.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 

@@ -52,13 +52,7 @@ class GoogleCalendar extends \Modularity\Module
             return;
         }
 
-        wp_register_style('modularity-google-apps', MODULARITYGOOGLEAPPS_URL . '/dist/css/modularity-google-apps.min.css', null, '1.0.0');
-        wp_enqueue_style('modularity-google-apps');
-
-        wp_register_script('modularity-google-calendar', MODULARITYGOOGLEAPPS_URL . '/dist/js/modularity-google-calendar.min.js', null, '1.0.0', true);
+        wp_register_script('modularity-google-calendar', MODULARITYGOOGLEAPPS_URL . '/dist/js/modularity-google-calendar.min.js', array('modularity-google-apps'), '1.0.0', true);
         wp_enqueue_script('modularity-google-calendar');
-
-        wp_register_script('google-client', 'https://apis.google.com/js/client.js?onload=modularityGoogleCalendar', array('modularity-google-calendar'), '1.0.0', true);
-        wp_enqueue_script('google-client');
     }
 }
