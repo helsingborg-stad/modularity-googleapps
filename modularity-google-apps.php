@@ -20,7 +20,7 @@ if (! defined('WPINC')) {
 
 define('MODULARITYGOOGLEAPPS_PATH', plugin_dir_path(__FILE__));
 define('MODULARITYGOOGLEAPPS_URL', plugins_url('', __FILE__));
-define('MODULARITYGOOGLEAPPS_TEMPLATE_PATH', MODULARITYDICTIONARY_PATH . 'templates/');
+define('MODULARITYGOOGLEAPPS_TEMPLATE_PATH', MODULARITYGOOGLEAPPS_PATH . 'templates/');
 
 load_plugin_textdomain('modularity-google-apps', false, plugin_basename(dirname(__FILE__)) . '/languages');
 

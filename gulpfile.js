@@ -12,7 +12,7 @@ var plumber = require('gulp-plumber');
 
 // Compile Our Sass
 gulp.task('sass-dist', function() {
-    gulp.src('source/sass/modularity-dictionary.scss')
+    gulp.src('source/sass/modularity-google-apps.scss')
             .pipe(plumber())
             .pipe(sass())
             .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -22,7 +22,7 @@ gulp.task('sass-dist', function() {
 });
 
 gulp.task('sass-dev', function() {
-    gulp.src('source/sass/modularity-dictionary.scss')
+    gulp.src('source/sass/modularity-google-apps.scss')
         .pipe(plumber())
         .pipe(sass())
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -34,10 +34,20 @@ gulp.task('sass-dev', function() {
 gulp.task('scripts-dist', function() {
     gulp.src([
             'source/js/**/*.js',
+            '!source/js/Module/*.js'
         ])
         .pipe(concat('modularity-dictionary.dev.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('modularity-dictionary.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+
+    gulp.src([
+            'source/js/Module/Calendar.js'
+        ])
+        .pipe(concat('modularity-google-calendar.dev.js'))
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rename('modularity-google-calendar.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });

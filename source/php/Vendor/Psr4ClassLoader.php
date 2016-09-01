@@ -1,6 +1,6 @@
 <?php
 
-namespace ModularityDictionary\Vendor;
+namespace ModularityGoogleApps\Vendor;
 
 /**
  * A PSR-4 compatible class loader.

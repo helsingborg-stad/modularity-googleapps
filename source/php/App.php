@@ -6,10 +6,8 @@ class App
 {
     public function __construct()
     {
-        new \ModularityGoogleApps\Dictionary();
-
         add_action('Modularity', function () {
-            new \ModularityGoogleApps\Module();
+            new \ModularityGoogleApps\Module\GoogleCalendar();
         });
 
         add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'));
