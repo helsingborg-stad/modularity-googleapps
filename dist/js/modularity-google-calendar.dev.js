@@ -79,7 +79,7 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
      */
     Calendar.prototype.embed = function(element, calendar) {
         var $element = $(element);
-        $element.find('.box-content').append('<iframe src="https://calendar.google.com/calendar/embed?src=' + calendar.id + '&ctz=' + calendar.timeZone + '" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>')
+        $element.find('.box-content').append('<iframe src="https://calendar.google.com/calendar/embed?src=' + calendar.id + '&ctz=' + calendar.timeZone + '" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>');
     };
 
     /**
