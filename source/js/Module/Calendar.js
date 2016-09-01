@@ -61,7 +61,11 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
             $element.find('.loading').remove();
 
             if (!response || response.error) {
-                $element.find('.box-content').append('<div class="notice warning pricon pricon-notice-warning pricon-space-right">Ditt Google-konto har inte behörighet att visa kalendern.</div>')
+                $element.find('.box-content').append('\
+                    <div class="notice warning pricon pricon-notice-warning pricon-space-right">\
+                        Ditt Google-konto har inte behörighet att visa kalendern.\
+                    </div>\
+                ')
                 return false;
             }
 
@@ -87,7 +91,14 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
      */
     Calendar.prototype.showAuthButtons = function() {
         $('.modularity-mod-g-calendar .loading').remove();
-        $('.modularity-mod-g-calendar .box-content').append('<div class="gutter text-center"><div class="gutter gutter-bottom">Du måste logga in med ditt Google-konto för att visa kunna visa kalendern.</div><button data-action="google-auth">Logga in</button></div>');
+        $('.modularity-mod-g-calendar .box-content').append('\
+            <div class="gutter text-center">\
+                <div class="gutter gutter-bottom">\
+                    Du måste logga in med ditt Google-konto för att visa kunna visa kalendern.\
+                </div>\
+                <button data-action="google-auth">Logga in</button>\
+            </div>\
+        ');
     };
 
     return new Calendar();
