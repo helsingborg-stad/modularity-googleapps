@@ -1,11 +1,11 @@
 ModularityGoogleApps = ModularityGoogleApps || {};
 
-ModularityGoogleApps.Auth = (function ($) {
-    var _clientId = '1041367213696-326pvm5bjfvg6i15o40tvfb6shk14p41.apps.googleusercontent.com';
-    var _scopes = [
-        "https://www.googleapis.com/auth/calendar.readonly"
-    ];
+ModularityGoogleApps.clientId = '1041367213696-326pvm5bjfvg6i15o40tvfb6shk14p41.apps.googleusercontent.com';
+ModularityGoogleApps.scopes = [
+    "https://www.googleapis.com/auth/calendar.readonly"
+];
 
+ModularityGoogleApps.Auth = (function ($) {
     /**
      * Constructor
      * Should be named as the class itself
@@ -31,8 +31,8 @@ ModularityGoogleApps.Auth = (function ($) {
      */
     Auth.prototype.checkAuth = function (callbackFn) {
         gapi.auth.authorize({
-            client_id: _clientId,
-            scope: _scopes.join(' '),
+            client_id: ModularityGoogleApps.clientId,
+            scope: ModularityGoogleApps.scopes.join(' '),
             immediate: true
         }, callbackFn);
     };
@@ -45,12 +45,11 @@ ModularityGoogleApps.Auth = (function ($) {
     Auth.prototype.defaultHandleAuthResponse = function(authResult) {
         // Access granted
         if (authResult && !authResult.error) {
-            console.log("Access granted");
+            location.reload();
             return true;
         }
 
         // Access denied
-        console.log("Access denied");
         return false;
     };
 
@@ -60,10 +59,10 @@ ModularityGoogleApps.Auth = (function ($) {
      */
     Auth.prototype.showAuthDialog = function() {
         gapi.auth.authorize({
-            client_id: _clientId,
-            scope: _scopes,
+            client_id: ModularityGoogleApps.clientId,
+            scope: ModularityGoogleApps.scopes,
             immediate: false
-        }, this.handleAuthResult);
+        }, this.defaultHandleAuthResponse);
 
         return false;
     };

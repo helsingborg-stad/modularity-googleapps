@@ -8,7 +8,6 @@ button[data-action="google-auth"] {
     padding: .3em .5em;
     padding-left: 40px;
     cursor: pointer;
-    transition: 200ms all;
 
     &::before {
         content: '';

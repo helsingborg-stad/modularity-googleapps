@@ -7,8 +7,7 @@ button[data-action="google-auth"] {
   font-size: 1em;
   padding: .3em .5em;
   padding-left: 40px;
-  cursor: pointer;
-  transition: 200ms all; }
+  cursor: pointer; }
   button[data-action="google-auth"]::before {
     content: '';
     display: inline-block;

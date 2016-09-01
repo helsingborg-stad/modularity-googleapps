@@ -1,15 +1,10 @@
 ModularityGoogleApps = ModularityGoogleApps || {};
 ModularityGoogleApps.Module = ModularityGoogleApps.Module || {};
 
+// Min: d8ahqql052gstai6b186uq5k5g@group.calendar.google.com
+//
+
 ModularityGoogleApps.Module.Calendar = (function ($) {
-
-    var _gapi = null;
-    var _clientId = '1041367213696-326pvm5bjfvg6i15o40tvfb6shk14p41.apps.googleusercontent.com';
-    var _scopes = [
-        "https://www.googleapis.com/auth/calendar.readonly"
-    ];
-
-
     /**
      * Constructor
      * Should be named as the class itself
@@ -17,62 +12,82 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
     function Calendar() {
     }
 
+    /**
+     * Initializes the Google Calendar module (login check)
+     * @return {voud}
+     */
     Calendar.prototype.init = function() {
         ModularityGoogleApps.Auth.checkAuth(function (authResult) {
-            // Access granted
+            // Access granted, check calendar perminssions for all calendars on current page
             if (authResult && !authResult.error) {
-                console.log("Access granted");
+                gapi.client.load('calendar', 'v3', function () {
+                    ModularityGoogleApps.Module.Calendar.checkCalendarsPermissions();
+                });
                 return true;
             }
 
-            // Access denied
+            // Access denied, show sign in button
             ModularityGoogleApps.Module.Calendar.showAuthButtons();
             return false;
         });
     };
 
     /**
-     * Check user authorization
+     * Check permissions for all calendars on the page
      * @return {void}
      */
-    Calendar.prototype.checkAuth = function () {
-        gapi.auth.authorize({
-            client_id: _clientId,
-            scope: _scopes.join(' '),
-            immediate: true
-        }, this.handleAuthResponse);
+    Calendar.prototype.checkCalendarsPermissions = function() {
+        $('.modularity-mod-g-calendar').each(function (index, element) {
+            $element = $(element);
+            var calendarId = $element.find('.box').data('calendar-id');
+            this.checkPermission(calendarId, element);
+        }.bind(this));
     };
 
     /**
-     * Handle auth response
-     * @param  {object} response Auth response
+     * Does the actual permission check
+     * @param  {string} calendarId Calendar ID
+     * @param  {object} element    Calendar module element
      * @return {void}
      */
-    Calendar.prototype.handleAuthResponse = function(authResult) {
-        // Access granted
-        if (authResult && !authResult.error) {
-            console.log("Access granted");
-            return;
-        }
+    Calendar.prototype.checkPermission = function(calendarId, element) {
+        var $element = $(element);
 
-        // Access denied
-        ModularityGoogleApps.Module.Calendar.showAuthButtons();
+        var request = gapi.client.calendar.calendarList.get({
+            calendarId: calendarId,
+        });
 
-        return;
+        request.execute(function(response) {
+            $element.find('.loading').remove();
+
+            if (!response || response.error) {
+                $element.find('.box-content').append('<div class="notice warning pricon pricon-notice-warning pricon-space-right">Ditt Google-konto har inte behörighet att visa kalendern.</div>')
+                return false;
+            }
+
+            ModularityGoogleApps.Module.Calendar.embed(element, response);
+            return true;
+        });
     };
 
-    Calendar.prototype.auth = function() {
-        gapi.auth.authorize({
-            client_id: _clientId,
-            scope: _scopes,
-            immediate: false
-        }, this.handleAuthResult);
-
-        return false;
+    /**
+     * Embeds Google Calendar
+     * @param  {element} element  Containing element
+     * @param  {object} calendar  Calenar object
+     * @return {void}
+     */
+    Calendar.prototype.embed = function(element, calendar) {
+        var $element = $(element);
+        $element.find('.box-content').append('<iframe src="https://calendar.google.com/calendar/embed?src=' + calendar.id + '&ctz=' + calendar.timeZone + '" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>')
     };
 
+    /**
+     * Show auth button if not logged in
+     * @return {void}
+     */
     Calendar.prototype.showAuthButtons = function() {
-        $('.modularity-mod-g-calendar .box-content').append('<div class="gutter text-center"><div class="gutter gutter-bottom"><strong>Privat kalender.</strong> Du måste logga in med ditt Google-konto för att se kalendern.</div><button data-action="google-auth">Logga in</button></div>');
+        $('.modularity-mod-g-calendar .loading').remove();
+        $('.modularity-mod-g-calendar .box-content').append('<div class="gutter text-center"><div class="gutter gutter-bottom">Du måste logga in med ditt Google-konto för att visa kunna visa kalendern.</div><button data-action="google-auth">Logga in</button></div>');
     };
 
     return new Calendar();
