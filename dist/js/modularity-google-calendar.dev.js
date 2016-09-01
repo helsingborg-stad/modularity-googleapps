@@ -1,9 +1,6 @@
 ModularityGoogleApps = ModularityGoogleApps || {};
 ModularityGoogleApps.Module = ModularityGoogleApps.Module || {};
 
-// Min: d8ahqql052gstai6b186uq5k5g@group.calendar.google.com
-//
-
 ModularityGoogleApps.Module.Calendar = (function ($) {
     /**
      * Constructor
