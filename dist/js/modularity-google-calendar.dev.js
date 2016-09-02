@@ -60,7 +60,7 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
             if (!response || response.error) {
                 $element.find('.box-content').append('\
                     <div class="notice warning pricon pricon-notice-warning pricon-space-right">\
-                        ' + ModularityGoogleApps.calendar.permissionError + '\
+                        ' + ModularityGoogleAppsLang.calendar.permissionError + '\
                     </div>\
                 ')
                 return false;
@@ -91,9 +91,9 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
         $('.modularity-mod-g-calendar .box-content').append('\
             <div class="gutter text-center">\
                 <div class="gutter gutter-bottom">\
-                    ' + ModularityGoogleApps.calendar.loginMessage + '\
+                    ' + ModularityGoogleAppsLang.calendar.loginMessage + '\
                 </div>\
-                <button data-action="google-auth">' + ModularityGoogleApps.calendar.login + '</button>\
+                <button data-action="google-auth">' + ModularityGoogleAppsLang.calendar.login + '</button>\
             </div>\
         ');
     };

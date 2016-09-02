@@ -32,7 +32,7 @@ class App
 
     public function enqueueApi()
     {
-        wp_localize_script('modularity-google-apps', 'ModularityGoogleApps', array(
+        wp_localize_script('modularity-google-apps', 'ModularityGoogleAppsLang', array(
             'calendar' => array(
                 'permissionError' => __('Your Google Accound does not have permission to view this calendar.', 'modularity-google-apps'),
                 'loginMessage' => __('You need to login with your Google Account to view this calendar.', 'modularity-google-apps'),
