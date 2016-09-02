@@ -1,6 +1,6 @@
 ModularityGoogleApps = ModularityGoogleApps || {};
 
-ModularityGoogleApps.clientId = '1041367213696-326pvm5bjfvg6i15o40tvfb6shk14p41.apps.googleusercontent.com';
+ModularityGoogleApps.clientId = '422479172774-cdkbjlgcf4gj320ph3saojd9vb3p9t3m.apps.googleusercontent.com';
 ModularityGoogleApps.scopes = [
     "https://www.googleapis.com/auth/calendar.readonly"
 ];
