@@ -1,7 +1,9 @@
 var ModularityGoogleApps = {};
 
 function modularityGoogleApps() {
-    ModularityGoogleApps.Module.Calendar.init();
+    if (typeof ModularityGoogleApps.Module.Calendar != 'undefined') {
+        ModularityGoogleApps.Module.Calendar.init();
+    }
 }
 
 ModularityGoogleApps = ModularityGoogleApps || {};
