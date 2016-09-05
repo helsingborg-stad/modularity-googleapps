@@ -40,6 +40,19 @@ class GoogleCalendar extends \Modularity\Module
             $paths[] = MODULARITYGOOGLEAPPS_TEMPLATE_PATH;
             return $paths;
         });
+
+        add_action('Modularity/Options/Module', function () {
+            echo '<p><label>Google Apps Client ID</label><br><input type="text" class="widefat" name="' . $this->args['id'] . '-client-id" value="' . get_option('modularity-g-calendar-client-id', '') . '"></p>';
+        });
+
+        add_action('Modularity/Options/Save', function () {
+            if (!isset($_POST[$this->args['id'] . '-client-id']) || empty($_POST[$this->args['id'] . '-client-id'])) {
+                delete_option('modularity-g-calendar-client-id');
+                return;
+            }
+
+            update_option('modularity-g-calendar-client-id', $_POST[$this->args['id'] . '-client-id']);
+        });
     }
 
     /**

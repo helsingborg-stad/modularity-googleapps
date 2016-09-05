@@ -14,6 +14,11 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
      * @return {voud}
      */
     Calendar.prototype.init = function() {
+        if (!ModularityGoogleApps.clientId) {
+            console.error('No Google API Client ID given in the Modularity settings.');
+            return;
+        }
+
         ModularityGoogleApps.Auth.checkAuth(function (authResult) {
             // Access granted, check calendar perminssions for all calendars on current page
             if (authResult && !authResult.error) {

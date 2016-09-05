@@ -40,6 +40,10 @@ class App
             )
         ));
 
+        wp_localize_script('modularity-google-calendar', 'ModularityGoogleCalendarLang', array(
+            'clientId' => get_option('modularity-g-calendar-client-id', '')
+        ));
+
         wp_register_script('google-client', 'https://apis.google.com/js/client.js?onload=modularityGoogleApps', null, '1.0.0', true);
         wp_enqueue_script('google-client');
     }

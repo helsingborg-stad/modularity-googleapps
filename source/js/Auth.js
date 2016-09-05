@@ -1,6 +1,6 @@
 ModularityGoogleApps = ModularityGoogleApps || {};
 
-ModularityGoogleApps.clientId = '422479172774-cdkbjlgcf4gj320ph3saojd9vb3p9t3m.apps.googleusercontent.com';
+ModularityGoogleApps.clientId = ModularityGoogleCalendarLang.clientId;
 ModularityGoogleApps.scopes = [
     "https://www.googleapis.com/auth/calendar.readonly"
 ];
@@ -11,6 +11,11 @@ ModularityGoogleApps.Auth = (function ($) {
      * Should be named as the class itself
      */
     function Auth() {
+        if (!ModularityGoogleApps.clientId) {
+            console.error('No Google API Client ID given in the Modularity settings.');
+            return;
+        }
+
         this.handleEvents();
     }
 
