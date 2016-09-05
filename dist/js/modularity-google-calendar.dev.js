@@ -14,7 +14,7 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
      * @return {voud}
      */
     Calendar.prototype.init = function() {
-        if (!ModularityGoogleApps.clientId) {
+        if (!ModularityGoogleAppsLang.clientId) {
             console.error('No Google API Client ID given in the Modularity settings.');
             return;
         }

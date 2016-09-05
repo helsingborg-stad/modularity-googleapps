@@ -33,15 +33,12 @@ class App
     public function enqueueApi()
     {
         wp_localize_script('modularity-google-apps', 'ModularityGoogleAppsLang', array(
+            'clientId' => get_option('modularity-g-calendar-client-id', ''),
             'calendar' => array(
                 'permissionError' => __('Your Google Accound does not have permission to view this calendar.', 'modularity-google-apps'),
                 'loginMessage' => __('You need to login with your Google Account to view this calendar.', 'modularity-google-apps'),
                 'login' => __('Log in')
             )
-        ));
-
-        wp_localize_script('modularity-google-calendar', 'ModularityGoogleCalendarLang', array(
-            'clientId' => get_option('modularity-g-calendar-client-id', '')
         ));
 
         wp_register_script('google-client', 'https://apis.google.com/js/client.js?onload=modularityGoogleApps', null, '1.0.0', true);

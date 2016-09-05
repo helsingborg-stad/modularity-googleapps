@@ -1,6 +1,11 @@
 var ModularityGoogleApps = {};
 
 function modularityGoogleApps() {
+    if (typeof ModularityGoogleApps.Module == 'undefined') {
+        return;
+    }
+
+    // Init module: Calendar
     if (typeof ModularityGoogleApps.Module.Calendar != 'undefined') {
         ModularityGoogleApps.Module.Calendar.init();
     }
@@ -8,7 +13,7 @@ function modularityGoogleApps() {
 
 ModularityGoogleApps = ModularityGoogleApps || {};
 
-ModularityGoogleApps.clientId = ModularityGoogleCalendarLang.clientId;
+ModularityGoogleApps.clientId = ModularityGoogleAppsLang.clientId;
 ModularityGoogleApps.scopes = [
     "https://www.googleapis.com/auth/calendar.readonly"
 ];
@@ -19,7 +24,7 @@ ModularityGoogleApps.Auth = (function ($) {
      * Should be named as the class itself
      */
     function Auth() {
-        if (!ModularityGoogleApps.clientId) {
+        if (!ModularityGoogleAppsLang.clientId) {
             console.error('No Google API Client ID given in the Modularity settings.');
             return;
         }
