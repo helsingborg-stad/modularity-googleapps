@@ -6,7 +6,9 @@ class App
 {
     public function __construct()
     {
-        new \ModularityGoogleApps\Module\GoogleCalendar();
+        add_action('Modularity', function () {
+            new \ModularityGoogleApps\Module\GoogleCalendar();
+        });
 
         add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
