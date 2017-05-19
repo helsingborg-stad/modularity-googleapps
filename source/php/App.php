@@ -6,19 +6,13 @@ class App
 {
     public function __construct()
     {
-        add_action('Modularity', function () {
-            new \ModularityGoogleApps\Module\GoogleCalendar();
-        });
+        modularity_register_module(
+            MODULARITYGOOGLEAPPS_PATH . 'source/php/Module/', // The directory path of the module
+            'Calendar' // The class' file and class name (should be the same) withot .php extension
+        );
 
-        add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueApi'), 15);
-    }
-
-    public function jsonLoadPath($paths)
-    {
-        $paths[] = MODULARITYGOOGLEAPPS_PATH . 'source/acf-json';
-        return $paths;
     }
 
     public function enqueue()

@@ -1,8 +1,13 @@
-{
+[{
     "key": "group_57c7f28ccb77e",
     "title": "Google Calendar",
     "fields": [
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_57c7f293618c1",
             "label": "Calendar ID",
             "name": "calendar_id",
@@ -14,12 +19,7 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            }
         }
     ],
     "location": [
@@ -38,6 +38,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1472721574
-}
+    "description": ""
+}]
+

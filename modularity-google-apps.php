@@ -27,6 +27,17 @@ load_plugin_textdomain('modularity-google-apps', false, plugin_basename(dirname(
 require_once MODULARITYGOOGLEAPPS_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once MODULARITYGOOGLEAPPS_PATH . 'Public.php';
 
+// Acf auto import and export
+add_action('plugins_loaded', function () {
+    $acfExportManager = new \AcfExportManager\AcfExportManager();
+    $acfExportManager->setTextdomain('modularity-google-apps');
+    $acfExportManager->setExportFolder(MODULARITYGOOGLEAPPS_PATH . 'acf-fields/');
+    $acfExportManager->autoExport(array(
+        'google-calendar' => 'group_57c7f28ccb77e'
+    ));
+    $acfExportManager->import();
+});
+
 // Instantiate and register the autoloader
 $loader = new ModularityGoogleApps\Vendor\Psr4ClassLoader();
 $loader->addPrefix('ModularityGoogleApps', MODULARITYGOOGLEAPPS_PATH);
