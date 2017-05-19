@@ -6,10 +6,12 @@ class App
 {
     public function __construct()
     {
-        modularity_register_module(
-            MODULARITYGOOGLEAPPS_PATH . 'source/php/Module/', // The directory path of the module
-            'Calendar' // The class' file and class name (should be the same) withot .php extension
-        );
+        add_action('plugins_loaded', function () {
+            modularity_register_module(
+                MODULARITYGOOGLEAPPS_PATH . 'source/php/Module/', // The directory path of the module
+                'Calendar' // The class' file and class name (should be the same) withot .php extension
+            );
+        });
 
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueApi'), 15);
