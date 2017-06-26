@@ -55,7 +55,7 @@ ModularityGoogleApps.Module.Calendar = (function ($) {
     Calendar.prototype.checkPermission = function(calendarId, element) {
         var $element = $(element);
 
-        var request = gapi.client.calendar.calendarList.get({
+        var request = gapi.client.calendar.calendars.get({
             calendarId: calendarId,
         });
 
