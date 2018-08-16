@@ -25,7 +25,6 @@ ModularityGoogleApps.Auth = (function ($) {
      */
     function Auth() {
         if (!ModularityGoogleAppsLang.clientId) {
-            console.error('No Google API Client ID given in the Modularity settings.');
             return;
         }
 
